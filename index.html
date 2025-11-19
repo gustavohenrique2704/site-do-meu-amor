@@ -248,10 +248,44 @@
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .carousel:hover {
-      transform: scale(1.02);
-      transition: all 0.4s ease;
-    }
+    .carousel {
+  width: 100%;
+  height: 550px; /* tamanho padrão para PC */
+}
+
+/* Tablets e celulares grandes */
+@media (max-width: 768px) {
+  .carousel {
+    height: 420px;
+  }
+}
+
+/* Celulares médios */
+@media (max-width: 560px) {
+  .carousel {
+    height: 360px;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 430px) {
+  .carousel {
+    height: 300px;
+  }
+}
+
+/* Celulares muito pequenos */
+@media (max-width: 360px) {
+  .carousel {
+    height: 260px;
+  }
+}
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* mantém sem distorcer */
+}
 
     /* Responsividade */
     @media (max-width: 768px) {
@@ -405,4 +439,5 @@
   </script>
 </body>
 </html>
+
 
