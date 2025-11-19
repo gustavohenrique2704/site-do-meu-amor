@@ -4,31 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uma pequena demonstração de carinho</title>
-  
+
   <!-- Importação das fontes Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     /* Reset e configurações básicas */
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Poppins', sans-serif;
-
-    /* Fundo fixo em tons de rosa e vermelho */
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    
-    /* Removida a animação de fundo */
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
 
     /* Container dos corações flutuantes */
     .hearts-container {
@@ -51,22 +47,9 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-100px) rotate(0deg) scale(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-        transform: translateY(-50px) rotate(36deg) scale(1);
-      }
-      90% {
-        opacity: 1;
-        transform: translateY(calc(100vh - 50px)) rotate(324deg) scale(1);
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg) scale(0);
-        opacity: 0;
-      }
+      0% { transform: translateY(-100px) scale(0); opacity: 0; }
+      10% { opacity: 1; transform: translateY(-50px) scale(1); }
+      100% { transform: translateY(100vh) scale(0); opacity: 0; }
     }
 
     /* Container principal */
@@ -97,7 +80,6 @@
     .main-title {
       font-family: 'Dancing Script', cursive;
       font-size: 3.5rem;
-      font-weight: 700;
       color: #fff;
       text-align: center;
       margin-bottom: 40px;
@@ -106,7 +88,6 @@
       line-height: 1.2;
     }
 
-    /* Parágrafos */
     p {
       font-size: 1.3rem;
       color: #fff;
@@ -115,10 +96,8 @@
       line-height: 1.7;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       animation: fadeInUp 1s ease-out;
-      font-weight: 400;
     }
 
-    /* Timer estilizado */
     #timer {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(20px);
@@ -127,317 +106,158 @@
       padding: 30px;
       margin: 40px 0;
       font-size: 1.2rem;
-      font-weight: 500;
       color: #fff;
       text-align: center;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
       animation: pulse 3s infinite;
+    }
+
+    /* --- CARROSSEL RESPONSIVO --- */
+    .carousel {
+      width: 100%;
+      height: 550px;
       position: relative;
       overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 40px;
     }
 
-    
-    
-
-    @keyframes borderGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s;
     }
 
-   
-    /* Caixa de citação melhorada */
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    /* Tablets e celulares grandes */
+    @media (max-width: 768px) {
+      .carousel { height: 420px; }
+      .main-title { font-size: 2.8rem; }
+      p { font-size: 1.2rem; }
+    }
+
+    /* Celulares médios */
+    @media (max-width: 560px) {
+      .carousel { height: 360px; }
+    }
+
+    /* Celulares pequenos */
+    @media (max-width: 430px) {
+      .carousel { height: 300px; }
+    }
+
+    /* Celulares muito pequenos */
+    @media (max-width: 360px) {
+      .carousel { height: 260px; }
+    }
+
+    /* Caixa de citação */
     .quote-box {
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(15px);
       padding: 40px;
       border-radius: 25px;
       margin: 50px 0;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      animation: slideInUp 1.2s ease-out;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      animation: shimmer 3s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
     }
 
     .quote {
       font-family: 'Dancing Script', cursive;
-      font-style: italic;
       font-size: 1.6rem;
       color: #333;
-      text-align: center;
-      font-weight: 600;
-      position: relative;
-      z-index: 2;
     }
 
-    .quote::before,
-    .quote::after {
-      content: '"';
-      font-size: 3rem;
-      color: #ff6b9d;
-      font-weight: bold;
-      position: relative;
-      top: 10px;
-    }
-
-    .coracao-pulsante {
-    font-size: 1.5em;
-    animation: heartBeat 1.5s infinite;
-  }
-    /* Mensagem final */
     .final-message {
       background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
       padding: 30px;
       border-radius: 20px;
       margin-top: 40px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    @keyframes glow {
-      from { box-shadow: 0 0 20px rgba(255, 107, 157, 0.3); }
-      to { box-shadow: 0 0 30px rgba(255, 107, 157, 0.6); }
-    }
-
-    /* Animações */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-80px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(80px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(100px) scale(0.9); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    /* Efeitos hover */
-    .quote-box:hover {
-      transform: translateY(-10px) scale(1.02);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .carousel {
-  width: 100%;
-  height: 550px; /* tamanho padrão para PC */
-}
-
-/* Tablets e celulares grandes */
-@media (max-width: 768px) {
-  .carousel {
-    height: 420px;
-  }
-}
-
-/* Celulares médios */
-@media (max-width: 560px) {
-  .carousel {
-    height: 360px;
-  }
-}
-
-/* Celulares pequenos */
-@media (max-width: 430px) {
-  .carousel {
-    height: 300px;
-  }
-}
-
-/* Celulares muito pequenos */
-@media (max-width: 360px) {
-  .carousel {
-    height: 260px;
-  }
-}
-
-.carousel img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* mantém sem distorcer */
-}
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .container { padding: 30px 20px; }
-      .main-title { font-size: 2.8rem; }
-      p { font-size: 1.2rem; }
-      .carousel { height: 350px; }
-      .quote { font-size: 1.4rem; }
-      #timer { font-size: 1.1rem; padding: 25px; }
-      .quote-box { padding: 30px; }
-    }
-
-    @media (max-width: 480px) {
-      .main-title { font-size: 2.2rem; }
-      p { font-size: 1.1rem; }
-      .carousel { height: 280px; }
-      .quote-box { padding: 25px; }
-      .quote { font-size: 1.2rem; }
-      .hearts-row { font-size: 2rem; }
-    }
-
-    /* Partículas flutuantes */
-    .particle {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
   </style>
 </head>
 
 <body>
-  <!-- Container dos corações flutuantes -->
   <div class="hearts-container" id="hearts-container"></div>
 
-  <!-- Conteúdo principal -->
   <div class="container">
-    <!-- Linha decorativa de corações -->
     <div class="hearts-row">
       <span class="coracao-pulsante">💗</span>
-
     </div>
 
-    <!-- Título principal -->
     <h1 class="main-title">Desde o dia em que você entrou na minha vida, tudo ficou mais especial.</h1>
 
-    <!-- Timer em tempo real -->
-    <div id="timer">Contando os segundos desde 13/07/2024...z\</div>
+    <div id="timer">Contando os segundos desde 13/07/2024...</div>
 
-    <!-- Carrossel de imagens -->
+    <!-- Carrossel -->
     <div class="carousel">
-      <img src="11674f6b-302d-434f-818b-9dcb6348b6c7.jpeg" class="active" alt="Momento especial 1">
-      <img src="d2daf02f-3c97-4f8d-82e9-db009f044364.jpeg" alt="Momento especial 2">
-      <img src="962ae6eb-08a6-432f-bfb6-a36d84ae4c72.jpeg" alt="Momento especial 3">
-      
-      <!-- Indicadores do carrossel -->
-      <div class="carousel-indicators">
-        <div class="indicator active" data-slide="0"></div>
-        <div class="indicator" data-slide="1"></div>
-        <div class="indicator" data-slide="2"></div>
-      </div>
+      <img src="11674f6b-302d-434f-818b-9dcb6348b6c7.jpeg" class="active">
+      <img src="d2daf02f-3c97-4f8d-82e9-db009f044364.jpeg">
+      <img src="962ae6eb-08a6-432f-bfb6-a36d84ae4c72.jpeg">
     </div>
 
-    <!-- Citação carinhosa -->
     <div class="quote-box">
-      <p class="quote">voce é a minha melhor escolha meu amoreu me apaixono todos os dias por voce pelo mesmo bom dia pelo mesmo cuidadopor tudo que voce providencia com amor e carinho pra mim eu te amo muito voce é a minha maior certeza quero dividir a minha vida ao seu lado sempre estar com voce cuidar de voce e te amar minha maior felicidade e ter esse privilego que é amar voce meu amor</p>
+      <p class="quote">
+        voce é a minha melhor escolha meu amoreu me apaixono todos os dias por voce pelo mesmo bom dia...
+      </p>
     </div>
 
-    <!-- Mensagem final -->
     <div class="final-message">
       <p>Obrigado por tudo, eu te amo muito 💕✨</p>
     </div>
   </div>
 
+<script>
+  const timer = document.getElementById("timer");
+  const startDate = new Date("2024-07-13T00:00:00");
 
- <script>
-    // Seleciona o elemento do timer
-    const timer = document.getElementById("timer");
-    const startDate = new Date("2024-07-13T00:00:00"); // Data de início
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-    // Atualiza o timer a cada segundo
-    function updateTimer() {
-      const now = new Date();
-      const diff = now - startDate;
-      const seconds = Math.floor(diff / 1000) % 60;
-      const minutes = Math.floor(diff / (1000 * 60)) % 60;
-      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    timer.innerHTML = `
+      <div>Já se passaram:</div>
+      <div style="font-size: 1.3rem; font-weight: 600;">
+        ${days} dias, ${hours}h ${minutes}min ${seconds}s
+      </div>
+    `;
+  }
 
-      // Exibe o tempo formatado
-      timer.innerHTML = `
-        <div style="font-size: 0.9rem; margin-bottom: 10px;">Já se passaram:</div>
-        <div style="font-size: 1.3rem; font-weight: 600;">
-          ${days} dias, ${hours}h ${minutes}min ${seconds}s
-        </div>
-        <div style="font-size: 0.9rem; margin-top: 10px;">desde que eu me interessei por você...💖</div>
-      `;
-    }
+  setInterval(updateTimer, 1000);
+  updateTimer();
 
-    setInterval(updateTimer, 1000); // Atualiza a cada 1s
-    updateTimer(); // Chamada inicial
+  // Carrossel
+  const images = document.querySelectorAll(".carousel img");
+  let current = 0;
 
-    // Carrossel automático de imagens
-    const images = document.querySelectorAll(".carousel img");
-    let current = 0;
-    setInterval(() => {
-      images[current].classList.remove("active");
-      current = (current + 1) % images.length;
-      images[current].classList.add("active");
-    }, 4000); // Troca de imagem a cada 4 segundos
+  setInterval(() => {
+    images[current].classList.remove("active");
+    current = (current + 1) % images.length;
+    images[current].classList.add("active");
+  }, 4000);
 
-    // Criação de corações animados
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '❤';
-      heart.style.left = Math.random() * 100 + '%'; // Posição aleatória
-      const size = Math.random() * 30 + 30;
-      heart.style.fontSize = size + 'px';
-      const duration = Math.random() * 15 + 15;
-      heart.style.animationDuration = duration + 's';
-      const delay = Math.random() * 3;
-      heart.style.animationDelay = delay + 's';
-      document.getElementById('hearts-container').appendChild(heart);
+  // Corações animados
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+    document.getElementById('hearts-container').appendChild(heart);
 
-      // Remove após animação
-      setTimeout(() => {
-        if (heart.parentNode) {
-          heart.parentNode.removeChild(heart);
-        }
-      }, (duration + delay) * 1000);
-    }
+    setTimeout(() => heart.remove(), 6000);
+  }
 
-    // Função recursiva para manter corações caindo continuamente
-    function startHeartAnimation() {
-      createHeart();
-      const nextHeart = Math.random() * 3000 + 1000;
-      setTimeout(startHeartAnimation, nextHeart);
-    }
+  setInterval(createHeart, 800);
 
-    startHeartAnimation(); // Inicia a animação
-    for (let i = 0; i < 5; i++) {
-      setTimeout(createHeart, i * 500); // Corações iniciais
-    }
-  </script>
+</script>
+
 </body>
 </html>
-
-
